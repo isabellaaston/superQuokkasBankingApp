@@ -17,16 +17,16 @@ console.log(dbURI)
 
 import transferMoneyController from './controllers/transferMoney';
 
-
-
 // Utils
-import excludePathsFromMiddleware from './Utils/excludePathsFromMiddleware.service'
+import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
+import checkEnvExists from './utils/checkEnvFileExists.service'
+checkEnvExists()
 
 // Auth Config
 const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: 'this is an long string about this and that and then and now, #HelloWorld!',
+    secret: process.env.AUTH0_SECRET,
     baseURL: 'http://localhost:3000',
     clientID: 'iIvLRODngj4VN7UQtXmPW7UWLit0Aevs',
     issuerBaseURL: 'https://dev-d3yyjm-y.eu.auth0.com'
@@ -60,4 +60,8 @@ app.get('/profile', (req, res) => {
 
 app.put('/transfer', transferMoneyController)
 
-export default app;
+app.get('/test', (req, res) => {
+    res.send('TEST')
+});
+
+export default app 
