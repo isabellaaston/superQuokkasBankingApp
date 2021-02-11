@@ -13,6 +13,8 @@ const app = express();
 import mongoose from "mongoose"
 const dbURI = process.env.MONGO_DB_URI
 
+import transferMoneyController from './controllers/transferMoney.controller';
+
 // Utils
 import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
 import checkEnvExists from './utils/checkEnvFileExists.service'
@@ -54,10 +56,10 @@ app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
+app.put('/transfer', transferMoneyController);
+
 app.get('/test', (req, res) => {
     res.send('TEST')
 });
 
-
-
-export default app 
+export default app;
