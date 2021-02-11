@@ -15,7 +15,7 @@ const dbURI = process.env.MONGO_DB_URI
 
 console.log(dbURI)
 
-const transferMoneyController = ('./Controllers/transferMoney')
+import transferMoneyController from './controllers/transferMoney';
 
 
 
@@ -61,4 +61,3 @@ app.get('/profile', (req, res) => {
 app.put('/transfer', transferMoneyController)
 
 export default app;
-
