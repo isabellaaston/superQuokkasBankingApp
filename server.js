@@ -13,16 +13,14 @@ const app = express();
 import mongoose from "mongoose"
 const dbURI = process.env.MONGO_DB_URI
 
-console.log(dbURI)
-
 // Utils
-import excludePathsFromMiddleware from './Utils/excludePathsFromMiddleware.service'
+import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
 
 // Auth Config
 const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: 'this is an long string about this and that and then and now, #HelloWorld!',
+    secret: process.env.AUTH0_SECRET,
     baseURL: 'http://localhost:3000',
     clientID: 'iIvLRODngj4VN7UQtXmPW7UWLit0Aevs',
     issuerBaseURL: 'https://dev-d3yyjm-y.eu.auth0.com'
