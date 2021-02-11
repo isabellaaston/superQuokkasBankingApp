@@ -58,13 +58,10 @@ app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
-import transferService from './services/transferMoney.service'
-
-app.put('/transfer', transferMoneyController)
+app.put('/transfer', transferMoneyController);
 
 app.get('/test', (req, res) => {
-    transferService("test1", "test2", 300)
     res.send('TEST')
 });
 
-export default app 
+export default app;
