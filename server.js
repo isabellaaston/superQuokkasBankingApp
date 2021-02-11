@@ -5,6 +5,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 const app = express();
 
+const transferMoneyController = ('./Controllers/transferMoney')
+
 // Utils
 import excludePathsFromMiddleware from './Utils/excludePathsFromMiddleware.service'
 
@@ -36,5 +38,6 @@ app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
+app.put('/transfer', transferMoneyController)
 
-export default app 
+export default app;
