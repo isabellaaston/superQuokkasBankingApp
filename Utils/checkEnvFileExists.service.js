@@ -1,7 +1,7 @@
 import fs from 'fs'
 import chalk from 'chalk'
 
-const path = '../.env'
+const path = './.env'
 
 const checkEnvExists = () => {
     const envExists =  fs.existsSync(path)

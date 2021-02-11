@@ -10,4 +10,4 @@ const getUserById = (userID) => {
 }
 
 
-export default { getUserByNickname, getUserById }
+export { getUserByNickname, getUserById }

@@ -15,7 +15,7 @@ const dbURI = process.env.MONGO_DB_URI
 
 console.log(dbURI)
 
-import transferMoneyController from './controllers/transferMoney';
+import transferMoneyController from './controllers/transferMoney.controller';
 
 // Utils
 import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
@@ -58,9 +58,12 @@ app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
+import transferService from './services/transferMoney.service'
+
 app.put('/transfer', transferMoneyController)
 
 app.get('/test', (req, res) => {
+    transferService("test1", "test2", 300)
     res.send('TEST')
 });
 
