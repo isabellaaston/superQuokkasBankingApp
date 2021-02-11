@@ -15,6 +15,8 @@ const dbURI = process.env.MONGO_DB_URI
 
 // Utils
 import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
+import checkEnvExists from './utils/checkEnvFileExists.service'
+checkEnvExists()
 
 // Auth Config
 const config = {
@@ -51,5 +53,11 @@ app.get('/', (req, res) => {
 app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
+
+app.get('/test', (req, res) => {
+    res.send('TEST')
+});
+
+
 
 export default app 
