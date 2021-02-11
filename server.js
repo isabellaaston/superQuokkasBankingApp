@@ -13,8 +13,6 @@ const app = express();
 import mongoose from "mongoose"
 const dbURI = process.env.MONGO_DB_URI
 
-console.log(dbURI)
-
 import transferMoneyController from './controllers/transferMoney.controller';
 
 // Utils
