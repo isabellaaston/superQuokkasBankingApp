@@ -9,6 +9,15 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 const app = express();
 
+// Handlebars
+import Handlebars from 'handlebars'
+import expressHandlebars from 'express-handlebars'
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
+
+const handlebars = expressHandlebars({
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
+})
+
 // Database Config
 import mongoose from "mongoose"
 const dbURI = process.env.MONGO_DB_URI
@@ -24,9 +33,10 @@ const config = {
     auth0Logout: true,
     secret: process.env.AUTH0_SECRET,
     baseURL: 'http://localhost:3000',
-    clientID: 'iIvLRODngj4VN7UQtXmPW7UWLit0Aevs',
+    clientID: 'GyaOKZFpFaw5ute7yOKb8a3VqWTIzbrA',
     issuerBaseURL: 'https://dev-d3yyjm-y.eu.auth0.com'
 };
+
 
 // Connect Database
 mongoose.connect(dbURI, { useNewUrlParser: true, dbName: 'App' },
@@ -37,6 +47,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, dbName: 'App' },
 
 
 // Setup Middleware
+app.use(express.static('public'))
+app.engine('handlebars', handlebars)
+app.set('view engine', 'handlebars')
+
 app.use(cors());
 app.use(auth(config));
 app.use(bodyParser.json());
@@ -47,7 +61,11 @@ app.use(excludePathsFromMiddleware(requiresAuth()))
 // --------- Main App --------- // 
 
 app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+    res.render('profile', {
+        data: {
+            loginStatus: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out'
+        }
+    })
 });
 
 app.get('/profile', (req, res) => {
