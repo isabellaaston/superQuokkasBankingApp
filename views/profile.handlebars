@@ -1,1 +1,53 @@
-{{{data.loginStatus}}}
+<div class="title">
+    <img class="profile-pic" src={{data.picture}}>
+    <h2 class="title-text"> Welcome {{{user.nickname}}}</h2>
+</div>
+
+<div class="balance">
+    Your balance is: {{user.balance}}
+</div>
+
+
+<div>
+    {{#each user.friends}}
+    <div class="list-group-item active">{{this.nickname}}</>
+        <button class="open-button" onclick="openForm()">Transfer</button>
+        {{/each}}
+    </div>
+
+    <div class="form-popup" id="myForm">
+        <form action="/transfer" method="post" class="form-container">
+            <h4>Transfer to {{this.nickname}}</h4>
+            <label><b>Receiver:</b></label>
+            <input type="text" name="receiverNickname" value="" required>
+
+            <label><b>Amount:</b></label>
+            <input type="number" placeholder="Amount" name="amount" id="amount" required>
+
+            <button type="submit" class="btn">Transfer</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+
+    </div>
+</div>
+
+<div id="emailForm">
+    <form action="/friends/invite" method="post" class="form-container">
+        <h2>Invite a friend to use Quokka banking!</h2>
+        <label><b>Email:</b></label>
+        <input type="email" name="email" value="" required>
+
+        <button type="submit" class="btn">Invite</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+
+</script>
