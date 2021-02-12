@@ -23,6 +23,7 @@ import mongoose from "mongoose"
 const dbURI = process.env.MONGO_DB_URI
 
 import transferMoneyController from './controllers/transferMoney.controller';
+import sendEmailController from './controllers/sendEmailController';
 
 // Utils
 import excludePathsFromMiddleware from './utils/excludePathsFromMiddleware.service'
@@ -50,6 +51,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, dbName: 'App' },
 
 // Setup Middleware
 app.use(express.static('public'))
+app.use(express.urlencoded)
 app.engine('handlebars', handlebars)
 app.set('view engine', 'handlebars')
 
@@ -73,6 +75,8 @@ app.get('/', (req, res) => {
 app.get('/profile', (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
+
+app.post('friends/invite', sendEmailController);
 
 app.put('/transfer', transferMoneyController);
 
