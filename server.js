@@ -66,7 +66,7 @@ app.use(excludePathsFromMiddleware(requiresAuth()))
 // --------- Main App --------- // 
 
 app.get('/', (req, res) => {
-    res.render('profile', {
+    res.render('Login', {
         data: {
             loginStatus: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out'
         }
